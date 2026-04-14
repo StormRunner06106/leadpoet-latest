@@ -2118,7 +2118,9 @@ def gateway_verify_submission(wallet: bt.wallet, lead_id: str) -> Dict:
             "signature": signature,
             "payload": payload
         }
-        
+
+        print(f"🔐 Event: {event}")
+        print(f"🔐 SUBMIT_URL: {GATEWAY_URL}/submit/")
         # Request verification
         response = requests.post(
             f"{GATEWAY_URL}/submit/",
