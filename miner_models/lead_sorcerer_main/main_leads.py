@@ -409,60 +409,61 @@ else:
 
     pass  # get_leads is defined below, outside the if/else block
 
-_all_leads: List[Dict[str, Any]] = []
-_lead_index: int = 0
+_DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 
 
-def _load_all_leads() -> List[Dict[str, Any]]:
-    """Load and cache all leads from data/leads*.json files in the project root."""
-    global _all_leads
-    if _all_leads:
-        return _all_leads
-
-    project_root = Path(__file__).resolve().parents[2]
-    data_dir = project_root / "data"
-    if not data_dir.exists():
-        print(f"⚠️ Data directory not found: {data_dir}")
+def _get_lead_files() -> List[Path]:
+    """Return sorted list of leads*.json files in the root data/ folder."""
+    if not _DATA_DIR.exists():
         return []
-
-    for file_path in sorted(data_dir.glob("leads*.json")):
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                file_leads = json.load(f)
-            if isinstance(file_leads, list):
-                _all_leads.extend(file_leads)
-                print(f"📂 Loaded {len(file_leads)} leads from {file_path.name}")
-        except Exception as e:
-            print(f"⚠️ Error loading {file_path.name}: {e}")
-
-    print(f"📦 Total leads loaded: {len(_all_leads)}")
-    return _all_leads
+    return sorted(_DATA_DIR.glob("leads*.json"))
 
 
 async def get_leads(num_leads: int,
                     industry: str = None,
                     region: str = None) -> List[Dict[str, Any]]:
     """
-    Return the next batch of leads (num_leads) from the JSON files in the
-    root data/ folder, cycling back to the start when exhausted.
+    Return the next num_leads unsourced leads from JSON files in the root
+    data/ folder. Marks returned leads as is_sourced=true in the files.
     """
-    global _lead_index
-
-    all_leads = _load_all_leads()
-    if not all_leads:
+    lead_files = _get_lead_files()
+    if not lead_files:
+        print("⚠️ No lead files found in data/")
         return []
 
-    total = len(all_leads)
-    start = _lead_index % total
-    end = start + num_leads
+    batch: List[Dict[str, Any]] = []
+    remaining = num_leads
 
-    if end <= total:
-        batch = all_leads[start:end]
-    else:
-        batch = all_leads[start:] + all_leads[:end - total]
+    for file_path in lead_files:
+        if remaining <= 0:
+            break
 
-    _lead_index = end % total
-    print(f"✅ Serving leads {start}-{start + num_leads - 1} ({len(batch)} leads)")
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                file_leads: List[Dict[str, Any]] = json.load(f)
+        except Exception as e:
+            print(f"⚠️ Error loading {file_path.name}: {e}")
+            continue
+
+        unsourced_indices = [
+            i for i, lead in enumerate(file_leads)
+            if not lead.get("is_sourced", False)
+        ]
+
+        if not unsourced_indices:
+            continue
+
+        picked = unsourced_indices[:remaining]
+        for i in picked:
+            batch.append(file_leads[i])
+            file_leads[i]["is_sourced"] = True
+
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(file_leads, f, indent=2, ensure_ascii=False)
+
+        remaining -= len(picked)
+
+    print(f"✅ Serving {len(batch)} unsourced leads")
     return batch
 
 
