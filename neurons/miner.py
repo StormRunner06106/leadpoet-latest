@@ -2129,6 +2129,12 @@ def sanitize_prospect(prospect, miner_hotkey=None):
         prospect.get("number_of_locations", prospect.get("Number of Locations", "")),
         "employee_count":
         strip_html(prospect.get("employee_count", prospect.get("Employee Count", ""))),
+        "hq_city":
+        strip_html(prospect.get("hq_city", "")),
+        "hq_state":
+        strip_html(prospect.get("hq_state", "")),
+        "hq_country":
+        strip_html(prospect.get("hq_country", "")),
         "socials":
         prospect.get("socials", {}),
         "source":
