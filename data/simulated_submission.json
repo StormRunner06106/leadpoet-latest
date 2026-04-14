@@ -1,0 +1,73 @@
+{
+  "lead": {
+    "id": 0,
+    "business": "Intuitive Machines",
+    "full_name": "Peter McGrath",
+    "first": "Peter",
+    "last": "McGrath",
+    "email": "pmcgrath@intuitivemachines.com",
+    "role": "Chief Financial Officer",
+    "website": "https://intuitivemachines.com",
+    "industry": "Science and Engineering",
+    "sub_industry": "Aerospace",
+    "country": "United States",
+    "state": "TX",
+    "city": "Greater Houston",
+    "linkedin": "https://www.linkedin.com/in/peter-mcgrath-24597631",
+    "company_linkedin": "https://www.linkedin.com/company/intuitive-machines/",
+    "source_url": "https://intuitivemachines.com",
+    "description": "We Open Access to the Moon for the Progress of Humanity™ Website http://intuitivemachines.com External link for Intuitive Machines",
+    "employee_count": "51-200",
+    "hq_country": "US",
+    "hq_state": "Texas",
+    "hq_city": "Houston",
+    "source_type": "company_site",
+    "phone_numbers": [],
+    "socials": {},
+    "is_sourced": false
+  },
+  "presign_event": {
+    "event_type": "SUBMISSION_REQUEST",
+    "actor_hotkey": "5GTorxG9Qobt4kLBchHkB3VWQNgSuLDjkQCbrBkbgiDAZ4UC",
+    "nonce": "d5c42a41-fb4b-4df6-a2de-797dcf62f35e",
+    "ts": "2026-04-14T17:56:42.259282+00:00",
+    "payload_hash": "2b359671937b1841e2c0eec55c100d57f9015bc324d0636e655a64c0080782ad",
+    "build_id": "miner-client",
+    "signature": "b2e2fdd89e8827748776fffc05271988bfb2542c4ef6c8209a36c9ddbf2604e0",
+    "payload": {
+      "lead_id": "07391bac-5a05-447e-b08e-972e67fe1d2f",
+      "lead_blob_hash": "1232907abd3d793e8373bdd977464abecfbb0bcb8242c36c55c9d2310e45bce3",
+      "email_hash": "63b0ad16cd66f2d49c7c5fd784f804963f844a58feb37f486b3e2408c011f0cd"
+    },
+    "_meta": {
+      "lead_blob_hash": "1232907abd3d793e8373bdd977464abecfbb0bcb8242c36c55c9d2310e45bce3",
+      "email_hash": "63b0ad16cd66f2d49c7c5fd784f804963f844a58feb37f486b3e2408c011f0cd",
+      "message": "SUBMISSION_REQUEST:5GTorxG9Qobt4kLBchHkB3VWQNgSuLDjkQCbrBkbgiDAZ4UC:d5c42a41-fb4b-4df6-a2de-797dcf62f35e:2026-04-14T17:56:42.259282+00:00:2b359671937b1841e2c0eec55c100d57f9015bc324d0636e655a64c0080782ad:miner-client"
+    }
+  },
+  "verify_event": {
+    "event_type": "SUBMIT_LEAD",
+    "actor_hotkey": "5GTorxG9Qobt4kLBchHkB3VWQNgSuLDjkQCbrBkbgiDAZ4UC",
+    "nonce": "3cc0529b-c214-43ad-9455-74c0257a6545",
+    "ts": "2026-04-14T17:56:42.260277+00:00",
+    "payload_hash": "fb41608f2a1367f06548aeeafb194464812e7fd386ad5e7ccc8846551b3e189d",
+    "build_id": "miner-client",
+    "signature": "2941e03e0d5f70dceeccceb04d86efa6ac1ab2af441dd3866f43f7d992199769",
+    "payload": {
+      "lead_id": "07391bac-5a05-447e-b08e-972e67fe1d2f"
+    },
+    "_meta": {
+      "message": "SUBMIT_LEAD:5GTorxG9Qobt4kLBchHkB3VWQNgSuLDjkQCbrBkbgiDAZ4UC:3cc0529b-c214-43ad-9455-74c0257a6545:2026-04-14T17:56:42.260277+00:00:fb41608f2a1367f06548aeeafb194464812e7fd386ad5e7ccc8846551b3e189d:miner-client"
+    }
+  },
+  "expected_response": {
+    "lead_id": "07391bac-5a05-447e-b08e-972e67fe1d2f",
+    "status": "verified",
+    "storage_backends": [
+      "s3",
+      "minio"
+    ],
+    "submission_timestamp": "2026-04-14T17:56:42.261274+00:00",
+    "merkle_proof": "ab41bffaac9546c2af6e49e4b5570b3487413e077cbd5e4bb5733de153e01847"
+  }
+}

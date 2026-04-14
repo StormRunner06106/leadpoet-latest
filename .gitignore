@@ -6,7 +6,6 @@ replit.md
 tests/
 path/
 validation_artifacts/
-data/
 # Includes gateway/logs/arweave_fallback/ (local event logging when Arweave fails)
 logs/
 validator_weights/
